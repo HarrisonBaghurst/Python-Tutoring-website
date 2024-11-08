@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Tutoring</title>
+    <style>
+        /* Load the VarelaRound font */
+        @font-face {
+            font-family: 'VarelaRound';
+            src: url('VARELAROUND-REGULAR.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* General reset and setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'VarelaRound', Arial, sans-serif; /* Apply VarelaRound font */
+        }
+
+        /* Dark theme background */
+        body {
+            background: linear-gradient(135deg, rgba(18, 18, 18, 1) 0%, rgba(40, 40, 40, 1) 50%, rgba(30, 30, 30, 1) 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            justify-content: flex-start; /* Keep content at the top */
+            height: 100vh;
+            padding-left: 5vw; /* Padding relative to viewport width */
+            padding-top: 5vh; /* Add some space from the top of the viewport */
+            background-attachment: fixed; /* Keep the background fixed during scrolling */
+        }
+
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 6rem);
+            margin-top: 8vh; /* Added margin-top to create space between title and nav bar */
+            margin-bottom: 2vh;
+            line-height: 1.2;
+            color: white;
+            text-align: center;
+        }
+
+        .description-text {
+            font-size: clamp(1.2rem, 1.5vw, 2rem); /* Smaller minimum size */
+            margin: 2vh 2vw; /* Vertical and horizontal margins set to 2vh and 2vw */
+            color: #aaa; /* Same color as email text */
+            text-align: left; /* Left aligned */
+            max-width: 50em; /* Increased max width to 50em */
+            line-height: 1.4; /* Optional: controls line height for better readability */
+        }
+
+        .description-text ul {
+            padding-left: 1rem; /* Optional: Add some padding on the left for bullets */
+        }
+
+        .description-text li {
+            line-height: 0.5; /* Reduces space between list items */
+            padding: 0.0vh 0; /* Adjust padding for less space */
+        }
+
+        /* Horizontal text box container */
+        .text-box-container {
+            display: flex;
+            justify-content: space-between; /* Spaces the text boxes apart */
+            width: 90%; /* Make sure the boxes are responsive */
+            margin-top: 5vh;
+        }
+
+        /* Remove the visual styles for the text boxes */
+        .text-box {
+            width: 45%; /* Keep the width of the text box as is */
+            height: auto; /* Let the height adjust based on content */
+            color: white; /* Keep text color */
+            font-size: 1.2rem;
+            text-align: left; /* Align text to the left */
+            margin-bottom: 2vh; /* Add some spacing between text boxes */
+            line-height: 1.4; /* Optional: controls line height for better readability */
+            background: none; /* Remove background */
+            border: none; /* Remove border */
+            padding: 0; /* Remove padding */
+        }
+
+        .text-box.description-text {
+            padding: 1rem; /* Add some padding if needed for the text inside the left box */
+            background-color: transparent; /* Ensure the background stays transparent */
+        }
+
+
+        .text-box:focus {
+            outline: none;
+            border-color: #888; /* Focus state for the text box */
+        }
+
+        /* Menu bar styles */
+        .menu-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            color: white;
+            padding: 1.5vh 3vw; /* Padding based on viewport size */
+            z-index: 10;
+            display: flex;
+            justify-content: flex-end; /* Align hamburger and links to the right */
+            align-items: center;
+        }
+
+        .menu-bar a {
+            color: #aaa; /* Same color as email text */
+            text-decoration: none;
+            margin: 0 1.5vw; /* Smaller spacing based on viewport width */
+            font-size: clamp(1.2rem, 1.5vw, 2rem); /* Minimum size 1.2rem, preferred 1.5vw, max 2rem */
+        }
+
+        .menu-bar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hamburger icon styles (Fixed size) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 36px; /* Fixed width */
+            height: 30px; /* Fixed height */
+        }
+
+        .hamburger div {
+            width: 100%;
+            height: 4px;
+            background-color: white;
+        }
+
+        /* Mobile menu styles */
+        .menu {
+            display: flex;
+        }
+
+        /* Mobile menu, shown instantly without transition */
+        .menu.mobile {
+            display: none; /* Initially hidden */
+            position: absolute;
+            top: 60px; /* Start the mobile menu just below the top bar */
+            left: 0;
+            right: 0;
+            background-color: #333;
+            flex-direction: column;
+            padding: 3vh 4vw;
+            z-index: 9;
+        }
+
+        .menu.mobile.show {
+            display: flex; /* Show it instantly */
+        }
+
+        .menu.mobile a {
+            padding: 2vh 4vw;
+            border-bottom: 1px solid #444;
+            color: white;  /* Links in white for visibility */
+            text-decoration: none;
+            font-size: clamp(1.2rem, 1.5vw, 2rem); /* Font size relative to viewport */
+        }
+
+        .menu.mobile a:hover {
+            text-decoration: underline; /* Highlight on hover */
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            /* Mobile menu links hidden */
+            .menu-bar a {
+                display: none;
+            }
+
+            /* Hamburger menu visible for mobile */
+            .hamburger {
+                display: flex;
+            }
+
+            /* Mobile menu displayed when "show" class is added */
+            .menu.mobile.show {
+                display: flex; /* Show it instantly */
+            }
+
+            /* When the hamburger menu is visible, align text to the top with some space from the top bar */
+            body {
+                justify-content: flex-start; /* Align text to the top */
+                padding-left: 5vw; /* Keep left padding for consistency */
+                padding-top: 10vh; /* Add space between the top bar and content */
+            }
+
+            /* Ensure the text boxes are stacked on top of each other on smaller screens */
+            .text-box-container {
+                flex-direction: column;
+                width: 90%;
+            }
+
+            .text-box {
+                width: 100%; /* Make the text boxes full width on smaller screens */
+                margin-bottom: 2vh; /* Add space between text boxes */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Menu Bar -->
+    <div class="menu-bar">
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="#">Pygame Tutoring</a>
+            <a href="#">About Me</a>
+        </div>
+    </div>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="menu mobile" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="#">Pygame Tutoring</a>
+        <a href="#">About Me</a>
+    </div>
+
+    <!-- Main Content -->
+    <h1>Python Tutoring</h1>
+
+    <!-- Text boxes below the title -->
+    <div class="text-box-container">
+        <!-- Left text box with description -->
+        <div class="text-box">
+            <p class="description-text">In this level of tutoring I will work from your existing level of knowledge. You could be a complete beginner or have some understanding of programming concepts. I will teach you new concepts and programming techniques by first explaining the theory, showing how it works with code, and then giving you challenges which we can work through together should you need any help.</p>
+            <p class="description-text">£7.50 (1st hour), £15 per hour afterwards</p> 
+            <p class="description-text">Enquiries - Harrison070806@gmail.com</p>
+        </div>
+    
+        <!-- Right text box with programming concepts -->
+        <div class="text-box">
+            <p class="description-text">Programming concepts taught include:</p>
+            <ul class="description-text">
+                <li class="description-text">Types</li>
+                <li class="description-text">Variables</li>
+                <li class="description-text">Printing outputs</li>
+                <li class="description-text">Input handling</li>
+                <li class="description-text">String handling</li>
+                <li class="description-text">List comprehension</li>
+                <li class="description-text">Boolean logic</li>
+                <li class="description-text">Selection</li>
+                <li class="description-text">Loops</li>
+                <li class="description-text">Subroutines</li>
+                <li class="description-text">File handling</li>
+                <li class="description-text">Additional modules</li>
+                <li class="description-text">Data structures</li>
+                <li class="description-text">Classes & OOP</li>
+                <li class="description-text">Error handling</li>
+                <li class="description-text">Problem solving</li>
+            </ul>
+        </div>
+    </div>
+    
+
+    <script>
+        // Toggle mobile menu on hamburger click
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburger.addEventListener('click', function() {
+            mobileMenu.classList.toggle('show');
+        });
+    </script>
+
+</body>
+</html>
