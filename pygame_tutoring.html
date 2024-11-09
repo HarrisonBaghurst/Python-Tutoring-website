@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="icon.ico">
     <title>Your Programming Tutor</title>
     <style>
         /* Load the VarelaRound font */
@@ -33,7 +32,6 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            justify-content: center; /* Keep content vertically centered */
             height: 100vh;
             padding-left: 5vw; /* Padding relative to viewport width */
             background-attachment: fixed; /* This line makes the background stationary */
@@ -41,25 +39,17 @@
 
         h1 {
             font-size: clamp(2.5rem, 5vw, 6rem); /* Increased min size to 2.5rem, max size to 6rem */
-            margin-bottom: 1.5vh; /* Vertical margin based on viewport height */
+            margin-top: 10vh; /* Default margin-top for mobile */
             line-height: 1.2;
-            color: white;
+            color: white; 
         }
 
-        .description-text {
-            font-size: clamp(1.2rem, 1.5vw, 2rem); /* Smaller minimum size */
-            margin: 2vh 2vw; /* Vertical and horizontal margins set to 2vh and 2vw */
-            color: #aaa; /* Same color as email text */
-            text-align: left; /* Left aligned */
-            max-width: 50em; /* Increased max width to 50em */
-            line-height: 1.4; /* Optional: controls line height for better readability */
-        }
+        p { 
+            margin-top: 4vh; 
+            margin-bottom: 4vh;
+            margin-left: 2vh; 
+            margin-right: 2vh;
 
-        /* Smaller email text */
-        .email {
-            font-size: clamp(1.2rem, 1.5vw, 2rem); /* Smaller minimum size */
-            color: #aaa; /* Same color as menu links */
-            margin: 2vh 2vw; /* Vertical and horizontal margins set to 2vh and 2vw */
         }
 
         /* Menu bar styles */
@@ -111,12 +101,13 @@
         /* Mobile menu, shown instantly without transition */
         .menu.mobile {
             display: none; /* Initially hidden */
-            position: fixed;
-            top: 60px; /* Start the mobile menu just below the top bar */
+            position: relative;
+            top: 0; /* Start the mobile menu just below the top bar */
             left: 0;
             right: 0;
             background-color: #333;
             flex-direction: column;
+            margin: 0; 
             padding: 3vh 4vw;
             z-index: 9;
         }
@@ -137,28 +128,24 @@
             text-decoration: underline; /* Highlight on hover */
         }
 
-        /* Image container in the bottom-right corner */
-        .image-container {
-            position: fixed;
-            bottom: 50px; /* Fixed 50px distance from the bottom */
-            right: 50px; /* Fixed 50px distance from the right */
-            width: 20vw; /* 20% of the viewport width */
-            height: 20vw; /* 20% of the viewport width (square aspect ratio) */
+        /* Content boxes */
+        .content-boxes {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* Ensures the image stays within the container */
+            justify-content: space-between;
+            width: 95%; /* Full width minus some padding */
+            margin-top: 5vh; /* Some space between title and boxes */
+            padding-bottom: 8vh; 
         }
 
-        /* Image inside the container with circular border */
-        .image-container img {
-            width: 100%; /* Image will fill the container */
-            height: 100%; /* Image will fill the container */
-            object-fit: cover; /* Ensures the image covers the area without distortion */
-            max-width: 250px; /* Maximum width */
-            max-height: 250px; /* Maximum height */
-            border-radius: 50%; /* Circular border */
-            border: 0.25vw solid #aaa; /* Border around the image, smaller (0.25% of the image size) */
+        .content-box {
+            background-color: rgba(40, 40, 40, 1); /* Original darker shade */
+            color: #aaa;  /* Light grey color similar to description text */
+            width: 48%; /* Each box takes up about half of the width */
+            padding: 2vh 3vw;
+            text-align: left; /* Align text to the left for readability */
+            border-radius: 10px; /* Optional: rounded corners */
+            line-height: 1.4; /* Similar line height as description text */
+            font-size: clamp(1.2rem, 1.5vw, 2rem); /* Font size relative to viewport width */
         }
 
         .bold_text { 
@@ -172,7 +159,12 @@
             body {
                 justify-content: flex-start;
                 padding-left: 5vw;
-                padding-top: 10vh; /* Add some space from the top */
+                padding-top: 5vh; /* Adjust margin on mobile to be the same as originally */
+            }
+
+            /* Set title margin-top to 10vh for mobile */
+            h1 {
+                margin-top: 10vh; /* Match original title margin on mobile */
             }
 
             /* Make sure the hamburger menu is visible and right-aligned */
@@ -186,23 +178,15 @@
                 margin-left: auto; /* Right-align the hamburger */
             }
 
-            /* Image container under the text, right-aligned */
-            .image-container {
-                position: relative; /* Position relative to the body */
-                width: 25vw; /* Adjust width relative to the viewport width */
-                height: auto; /* Let the height adjust based on the image aspect ratio */
-                margin-top: 10vh; /* Add space from the content above */
-                margin-left: auto; /* Right align the image */
-                margin-right: 0; /* Remove left margin */
-                display: block; /* Ensure it's treated as a block element */
+            /* Stack content boxes vertically on mobile */
+            .content-boxes {
+                flex-direction: column;
+                width: 90%;
             }
 
-            /* Image inside the container */
-            .image-container img {
-                width: 100%; /* Make sure the image fills the container */
-                height: auto; /* Maintain aspect ratio */
-                border-radius: 50%; /* Circular border */
-                border: 0.25vw solid #aaa; /* Maintain the circular border */
+            .content-box {
+                width: 100%; /* Boxes should take full width on mobile */
+                margin-bottom: 3vh; /* Space between boxes */
             }
 
             /* Hide navigation links on mobile */
@@ -242,75 +226,61 @@
 
         /* Desktop styles (unchanged) */
         @media (min-width: 769px) {
-            .hamburger {
-                display: none; /* Hide hamburger on desktop */
+            h1 {
+                margin-top: 15vh; /* Increased space from the top for desktop */
             }
 
-            /* Image remains fixed in the bottom-right corner on desktop */
-            .image-container {
-                position: fixed;
-                bottom: 50px;
-                right: 50px;
-                width: 20vw;
-                height: 20vw;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                overflow: hidden;
-            }
-
-            .image-container img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                max-width: 250px;
-                max-height: 250px;
-                border-radius: 50%;
-                border: 0.25vw solid #aaa;
+            /* Increase the distance between title and text boxes */
+            .content-boxes {
+                margin-top: 10vh; /* Increased space for desktop */
             }
         }
 
     </style>
 </head>
 <body>
-    <div class="background-div">
-
-        <!-- Menu Bar -->
-        <div class="menu-bar">
-            <div class="hamburger" id="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <div class="menu">
-                <a href="python_tutoring.html">Python Tutoring</a>
-                <a href="pygame_tutoring.html">Pygame Tutoring</a>
-                <a href="about_me.html">About Me</a>
-                <a href="https://github.com/HarrisonBaghurst">My Github</a>
-            </div>
+    <!-- Menu Bar -->
+    <div class="menu-bar">
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-
-        <!-- Mobile Menu (hidden by default) -->
-        <div class="menu mobile" id="mobile-menu">
+        <div class="menu">
+            <a href="index.html">Home</a>
             <a href="python_tutoring.html">Python Tutoring</a>
-            <a href="pygame_tutoring.html">Pygame Tutoring</a>
             <a href="about_me.html">About Me</a>
             <a href="https://github.com/HarrisonBaghurst">My Github</a>
         </div>
+    </div>
 
-        <!-- Main Content -->
-        <h1>Your Personal Programming Tutor</h1>
-        <p class="description-text"> Harrison Baghurst - Current Durham University Computer Science student</p>
-        <p class="description-text">I offer personalised Python programming tutoring for all skill levels, from beginners to advanced learners. 
-            Whether you're just starting out or looking to deepen your understanding of complex programming concepts, 
-            I will guide you through the learning process with tailored lessons that meet your individual needs.</p>
-        <p class="description-text"><span class="bold_text">Enquiries - Harrison070806@gmail.com</span></p>
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="menu mobile" id="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="python_tutoring.html">Python Tutoring</a>
+        <a href="about_me.html">About Me</a>
+        <a href="https://github.com/HarrisonBaghurst">My Github</a>
+    </div>
 
-        <!-- Image container -->
-        <div class="image-container">
-            <img src="my-image.jpg" alt="Tutor Image">
+    <!-- Main Content -->
+    <h1>Pygame Tutoring</h1>
+
+    <!-- Content Boxes -->
+    <div class="content-boxes">
+        <div class="content-box">
+            <p><span class="bold_text">Who can learn Pygame?</span></p>
+            <p>Pygame is an accessible framework for creating simple games and visuals, but developing more complex projects requires knowledge of programming concepts like Object-Oriented Programming (OOP). Therefore, I recommend a solid understanding of Python programming before undertaking Pygame tutoring.</p>
+            <p>In this tutoring session, we will collaborate on a game project of your choice. I will guide you through using Pygame and help you implement key game components. Additionally, we will address and troubleshoot more complex bugs, as debugging is an essential skill in larger projects.</p>
+            <p>Lessons will be conducted via online video call, requiring a stable internet connection, a microphone, and a device (PC or laptop) for programming. A camera is not necessary.</p>
+            <p><span class="bold_text">£7.50</span> for the initial hour, followed by <span class="bold_text">£15</span> per hour afterwards.</p>
+            <p><span class="bold_text">Enquiries - Harrison070806@gmail.com</span></p>
+
         </div>
-
+        <div class="content-box">
+            <p><span class="bold_text">What will be taught?</span></p>
+            <p>We will start by discussing your desired project and evaluating its feasibility with Pygame (most projects are possible, though 3D graphics, for example, are a limitation). It's important to have a clear vision for your project, but I believe it's more crucial to begin and refine the plan as we move forward.</p>
+            <p>I will guide you through setting up the game screen, drawing on it, and using inputs to modify the display. From there, the lessons will be tailored to your specific project. Topics we may cover include resource optimisation, sprite design, game development principles, best practices, and various techniques I have learned over the past four years working with Pygame.</p>
+        </div>
     </div>
 
     <script>
