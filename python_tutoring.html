@@ -34,13 +34,19 @@
             align-items: flex-start;
             height: 100vh;
             padding-left: 5vw; /* Padding relative to viewport width */
+            background-attachment: fixed; /* This line makes the background stationary */
         }
 
         h1 {
             font-size: clamp(2.5rem, 5vw, 6rem); /* Increased min size to 2.5rem, max size to 6rem */
             margin-top: 10vh; /* Default margin-top for mobile */
             line-height: 1.2;
-            color: white;
+            color: white; 
+        }
+
+        p { 
+            margin-top: 4vh; 
+            margin-bottom: 4vh
         }
 
         /* Menu bar styles */
@@ -92,12 +98,13 @@
         /* Mobile menu, shown instantly without transition */
         .menu.mobile {
             display: none; /* Initially hidden */
-            position: absolute;
-            top: 60px; /* Start the mobile menu just below the top bar */
+            position: relative;
+            top: 0; /* Start the mobile menu just below the top bar */
             left: 0;
             right: 0;
             background-color: #333;
             flex-direction: column;
+            margin: 0; 
             padding: 3vh 4vw;
             z-index: 9;
         }
@@ -122,12 +129,13 @@
         .content-boxes {
             display: flex;
             justify-content: space-between;
-            width: 90%; /* Full width minus some padding */
+            width: 95%; /* Full width minus some padding */
             margin-top: 5vh; /* Some space between title and boxes */
+            padding-bottom: 8vh; 
         }
 
         .content-box {
-            background-color: rgba(18, 18, 18, 0.9); /* Original darker shade */
+            background-color: rgba(40, 40, 40, 1); /* Original darker shade */
             color: #aaa;  /* Light grey color similar to description text */
             width: 48%; /* Each box takes up about half of the width */
             padding: 2vh 3vw;
@@ -181,8 +189,8 @@
             /* Mobile menu should be hidden initially and shown when toggled */
             .menu.mobile {
                 display: none; /* Hide the mobile menu initially */
-                position: absolute;
-                top: 60px; /* Position below the header */
+                position: fixed;
+                top: 40px; /* Position below the header */
                 left: 0;
                 right: 0;
                 background-color: #333;
@@ -223,7 +231,6 @@
     </style>
 </head>
 <body>
-
     <!-- Menu Bar -->
     <div class="menu-bar">
         <div class="hamburger" id="hamburger">
@@ -251,7 +258,9 @@
     <!-- Content Boxes -->
     <div class="content-boxes">
         <div class="content-box">
-            This is a test
+            <p>In this level of tutoring, I will tailor the lessons to your current level of knowledge, whether you're a beginner or have some experience with programming. I will introduce new concepts and techniques, starting with a theoretical explanation, followed by practical code examples, and provide you with challenges to work through. I will offer guidance and support as needed to ensure your understanding.</p>
+            <p>Lessons will be conducted via online video call, requiring a stable internet connection, a microphone, and a device (PC or laptop) for programming. A camera is not necessary.</p>
+            <p>£7.50 for the initial hour, followed by £15 per hour afterwards.</p>
         </div>
         <div class="content-box">
             This is a test

@@ -35,6 +35,7 @@
             justify-content: center; /* Keep content vertically centered */
             height: 100vh;
             padding-left: 5vw; /* Padding relative to viewport width */
+            background-attachment: fixed; /* This line makes the background stationary */
         }
 
         h1 {
@@ -109,7 +110,7 @@
         /* Mobile menu, shown instantly without transition */
         .menu.mobile {
             display: none; /* Initially hidden */
-            position: absolute;
+            position: fixed;
             top: 60px; /* Start the mobile menu just below the top bar */
             left: 0;
             right: 0;
@@ -206,8 +207,8 @@
             /* Mobile menu should be hidden initially and shown when toggled */
             .menu.mobile {
                 display: none; /* Hide the mobile menu initially */
-                position: absolute;
-                top: 60px; /* Position below the header */
+                position: fixed;
+                top: 40px; /* Position below the header */
                 left: 0;
                 right: 0;
                 background-color: #333;
@@ -266,39 +267,42 @@
     </style>
 </head>
 <body>
+    <div class="background-div">
 
-    <!-- Menu Bar -->
-    <div class="menu-bar">
-        <div class="hamburger" id="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
+        <!-- Menu Bar -->
+        <div class="menu-bar">
+            <div class="hamburger" id="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="menu">
+                <a href="python_tutoring.html">Python Tutoring</a>
+                <a href="#">Pygame Tutoring</a>
+                <a href="#">About Me</a>
+            </div>
         </div>
-        <div class="menu">
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div class="menu mobile" id="mobile-menu">
             <a href="python_tutoring.html">Python Tutoring</a>
             <a href="#">Pygame Tutoring</a>
             <a href="#">About Me</a>
         </div>
-    </div>
 
-    <!-- Mobile Menu (hidden by default) -->
-    <div class="menu mobile" id="mobile-menu">
-        <a href="python_tutoring.html">Python Tutoring</a>
-        <a href="#">Pygame Tutoring</a>
-        <a href="#">About Me</a>
-    </div>
+        <!-- Main Content -->
+        <h1>Your Personal Programming Tutor</h1>
+        <p class="description-text"> Harrison Baghurst - Current Durham University Computer Science student</p>
+        <p class="description-text">I offer personalized Python programming tutoring for all skill levels, from beginners to advanced learners. 
+            Whether you're just starting out or looking to deepen your understanding of complex programming concepts, 
+            I will guide you through the learning process with tailored lessons that meet your individual needs.</p>
+        <p class="email">Enquiries - Harrison070806@gmail.com</p>
 
-    <!-- Main Content -->
-    <h1>Your Personal Programming Tutor</h1>
-    <p class="description-text"> Harrison Baghurst - Current Durham University Computer Science student</p>
-    <p class="description-text">I offer personalized Python programming tutoring for all skill levels, from beginners to advanced learners. 
-        Whether you're just starting out or looking to deepen your understanding of complex programming concepts, 
-        I will guide you through the learning process with tailored lessons that meet your individual needs.</p>
-    <p class="email">Enquiries - Harrison070806@gmail.com</p>
+        <!-- Image container -->
+        <div class="image-container">
+            <img src="your-image.jpg" alt="Tutor Image">
+        </div>
 
-    <!-- Image container -->
-    <div class="image-container">
-        <img src="your-image.jpg" alt="Tutor Image">
     </div>
 
     <script>
