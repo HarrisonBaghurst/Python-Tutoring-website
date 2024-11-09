@@ -159,43 +159,107 @@
             border: 0.25vw solid #aaa; /* Border around the image, smaller (0.25% of the image size) */
         }
 
-        /* Media Queries */
+        /* Mobile specific styles */
         @media (max-width: 768px) {
-            /* Mobile menu links hidden */
-            .menu-bar a {
-                display: none;
+            /* Ensure the content is aligned at the top of the page */
+            body {
+                justify-content: flex-start;
+                padding-left: 5vw;
+                padding-top: 10vh; /* Add some space from the top */
             }
 
-            /* Hamburger menu visible for mobile */
+            /* Make sure the hamburger menu is visible and right-aligned */
             .hamburger {
                 display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 36px; /* Set the width of the hamburger */
+                height: 30px; /* Set the height of the hamburger */
+                cursor: pointer;
+                margin-left: auto; /* Right-align the hamburger */
             }
 
-            /* Mobile menu displayed when "show" class is added */
-            .menu.mobile.show {
-                display: flex; /* Show it instantly */
-            }
-
-            /* When the hamburger menu is visible, align text to the top with some space from the top bar */
-            body {
-                justify-content: flex-start; /* Align text to the top */
-                padding-left: 5vw; /* Keep left padding for consistency */
-                padding-top: 10vh; /* Add space between the top bar and content */
-            }
-
-            /* Ensure the image stays at the bottom-right */
+            /* Image container under the text, right-aligned */
             .image-container {
-                position: fixed;
-                bottom: 50px; /* Fixed 50px from the bottom */
-                right: 50px; /* Fixed 50px from the right */
-                width: 20vw; /* 20% of the viewport width */
-                height: 20vw; /* 20% of the viewport width (square aspect ratio) */
+                position: relative; /* Position relative to the body */
+                width: 25vw; /* Adjust width relative to the viewport width */
+                height: auto; /* Let the height adjust based on the image aspect ratio */
+                margin-top: 10vh; /* Add space from the content above */
+                margin-left: auto; /* Right align the image */
+                margin-right: 0; /* Remove left margin */
+                display: block; /* Ensure it's treated as a block element */
+            }
+
+            /* Image inside the container */
+            .image-container img {
+                width: 100%; /* Make sure the image fills the container */
+                height: auto; /* Maintain aspect ratio */
+                border-radius: 50%; /* Circular border */
+                border: 0.25vw solid #aaa; /* Maintain the circular border */
+            }
+
+            /* Hide navigation links on mobile */
+            .menu-bar a {
+                display: none; /* Hide links on mobile */
+            }
+
+            /* Mobile menu should be hidden initially and shown when toggled */
+            .menu.mobile {
+                display: none; /* Hide the mobile menu initially */
+                position: absolute;
+                top: 60px; /* Position below the header */
+                left: 0;
+                right: 0;
+                background-color: #333;
+                flex-direction: column;
+                padding: 3vh 4vw;
+                z-index: 9;
+            }
+
+            .menu.mobile.show {
+                display: flex; /* Show the menu when toggled */
+            }
+
+            .menu.mobile a {
+                padding: 2vh 4vw;
+                border-bottom: 1px solid #444;
+                color: #aaa;  /* Links in the dropdown menu match navigation links color */
+                text-decoration: none;
+                font-size: clamp(1.2rem, 1.5vw, 2rem); /* Font size relative to viewport */
+            }
+
+            .menu.mobile a:hover {
+                text-decoration: underline; /* Highlight on hover */
             }
         }
 
+        /* Desktop styles (unchanged) */
         @media (min-width: 769px) {
             .hamburger {
-                display: none;
+                display: none; /* Hide hamburger on desktop */
+            }
+
+            /* Image remains fixed in the bottom-right corner on desktop */
+            .image-container {
+                position: fixed;
+                bottom: 50px;
+                right: 50px;
+                width: 20vw;
+                height: 20vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+            .image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                max-width: 250px;
+                max-height: 250px;
+                border-radius: 50%;
+                border: 0.25vw solid #aaa;
             }
         }
 
